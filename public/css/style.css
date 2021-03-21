@@ -1,93 +1,157 @@
-html {
-    height: 100%;
-  }
-  body {
-    padding: 0;
-    margin: 0;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light",
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light",
       "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue",
       "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight: 300;
-    background: #f7f7f7 url(../img/geometry.png) 0 0 no-repeat;
-    background-size: cover;
-    color: #333;
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+section {
+  max-width: 1100px;
+  margin: auto;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.chat-btn {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  background: #ffa726;
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.4);
+}
+
+
+.chat-btn:hover,
+.submit:hover {
+  opacity: 1;
+}
+
+button { 
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 120px;
+  height: 400px;
+  width: 300px;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.75rem;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+  border-radius: 10px;
+}
+
+.show {
+  display: flex;
+}
+
+.chat-area {
+  height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.incoming-msg {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.incoming-msg  .bot-msg{
+  background-color: #ffa726;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.input-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+input[type="text"] {
+  width: 100%;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  border-radius: 5px;
+  height: 2.2rem;
+  text-align: justify;
+  resize: vertical;
+  padding: 1px 6px;  
+  max-width: inherit;
+  resize: vertical;
+}
+
+input:focus {
+  outline: none;
+}
+
+.submit {
+  padding: 0.25rem 0.70rem;
+  margin-left: 0.5rem;
+  background-color: #ffa726;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  opacity: 0.7;
+}
+
+.my-msg {
+  text-align: left;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.75rem;
+  padding: 0.5rem;
+  background-color: #ddd;
+  border-radius: 25px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+  word-break: break-all;
+}
+
+.outgoing-msg {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media (max-width: 500px) {
+
+  .chat-popup {
+      bottom: 120px;
+      right: 10%;
+      width: 80vw;
   }
-  footer {
-    font-size: 0.75em;
-    color: silver;
-    position: fixed;
-    bottom: 1em;
-    left: 1em;
-  }
-  footer a {
-    color: #f80;
-  }
-  header {
-    margin: 2em 0;
-    text-align: center;
-  }
-  h1,
-  h2,
-  h3 {
-    margin: 0;
-    text-rendering: optimizeLegibility;
-    text-align: center;
-  }
-  h1 {
-    font-weight: 400;
-    font-size: 3em;
-  }
-  h2 {
-    font-weight: 300;
-    margin-top: 0.5em;
-  }
-  section {
-    margin: 1.5em auto;
-    width: 400px;
-  }
-  button {
-    display: block;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 200px;
-    height: 200px;
-    border: 0;
-    border-radius: 50%;
-    padding: 0.7em 1em;
-    margin: 4em auto 3em;
-    text-align: center;
-    color: #fff;
-    background-color: #ffa726;
-    box-shadow: 2px 5px 30px rgba(201, 162, 63, 0.4);
-  
-    will-change: transform, filter;
-    transition: all 0.3s ease-out;
-  }
-  button .fa {
-    font-size: 130px;
-    line-height: 200px;
-    margin: 0;
-    text-shadow: 1px 2px 2px #fab148;
-  }
-  button:hover {
-    transform: scale(0.92);
-  }
-  button:active {
-    filter: brightness(0.8);
-  }
-  button:focus {
-    outline: 0;
-  }
-  
-  .fa {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: 1.3em;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin-left: 10px;
-  }
-  .fa-github::before {
-    content: "\f09b";
-  }
+}

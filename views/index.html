@@ -3,27 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <script src="https://kit.fontawesome.com/55711eed63.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css" />
     <title>Web Speech AI chatbot</title>
   </head>
   <body>
     <section>
-      <h1>AI Chat-Bot</h1>
-      <h2>with Web Speech API</h2>
+      <button class="chat-btn">
+        <i class="far fa-comment-dots"></i>
+      </button>
 
-      <button><i class="fa fa-microphone"></i></button>
-
-      <div>
-        <p>You said: <em class="output-you"></em></p>
-        <p>Bot replied: <em class="output-bot"></em></p>
+      <div class="chat-popup">
+        <div class="chat-area">
+          <div class="incoming-msg">
+            <img src="img/bot.jpg" class="avatar" alt="">
+            <span class="bot-msg">Hi, How can I help you?</span>
+          </div>
+        </div>
+        <div class="input-area">
+          <input type="text">
+          <button class="submit send"><i class="far fa-paper-plane"></i></button>
+          <button class="submit mic"><i class="fas fa-microphone"></i></button>
+        </div>
       </div>
-      </section>
-
+    </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
+
+
