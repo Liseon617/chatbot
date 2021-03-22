@@ -53,8 +53,8 @@ button {
   position: fixed;
   bottom: 80px;
   right: 120px;
-  height: 400px;
-  width: 300px;
+  height: 500px;
+  width: 350px;
   background-color: #fff;
   flex-direction: column;
   justify-content: space-between;
@@ -71,6 +71,7 @@ button {
   height: 80%;
   overflow-y: auto;
   overflow-x: hidden;
+  text-align: left;
 }
 
 .incoming-msg {

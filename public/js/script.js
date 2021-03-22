@@ -1,6 +1,3 @@
-/*const btn = document.querySelector("button");
-const outputme = document.querySelector(".output-you");
-const outputbot = document.querySelector(".output-bot");*/
 const popup = document.querySelector('.chat-popup');
 const chatBtn = document.querySelector('.chat-btn');
 const submitBtn = document.querySelector('.send');
@@ -16,15 +13,20 @@ const recognition = new SpeechRecognition();
 
 recognition.lang = "en-US";
 recognition.interimResults = false;
+let recognised = false;
 
+const synth = window.speechSynthesis;
 micBtn.addEventListener("click", () => {
-  recognition.start();
+  console.log(recognised)
+  if(recognised == false) 
+    recognition.start();
+  else if (recognised == true)
+    synth.cancel();
 });
 
 recognition.onresult = function (event) {
   const last = event.results.length - 1;
   const text = event.results[last][0].transcript;
-  console.log(text);
 
   let temp = `<div class="outgoing-msg">
   <span class="my-msg">${text}</span>
@@ -33,41 +35,49 @@ recognition.onresult = function (event) {
   chatArea.insertAdjacentHTML("beforeend", temp);
   chatArea.scrollTop = chatArea.scrollHeight;
   socket.emit("chat message", text);
+  recognised = true;
 };
 
 const botReply = (text) => {
-  const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance();
   utterance.text = text;
   utterance.pitch = 1;
   utterance.volume = 1;
 
+  document.getElementById('mic').classList.remove('fa-microphone-alt');
+  document.getElementById('mic').classList.add('fa-microphone-alt-slash')
+
   synth.speak(utterance);
+  utterance.onend = function() {
+    document.getElementById('mic').classList.remove('fa-microphone-alt-slash')
+    document.getElementById('mic').classList.add('fa-microphone-alt');
+    recognised = false;
+  }
 };
 
 socket.on("bot reply", (text) => {
-    let temp = `<div class="incoming-msg">
-    <img src="img/bot.jpg" class="avatar">
-    <span class="bot-msg">${text}</span>
-    </div>`;
-    chatArea.insertAdjacentHTML("beforeend", temp);
-    chatArea.scrollTop = chatArea.scrollHeight;
-    botReply(text);
+  let temp = `<div class="incoming-msg">
+  <img src="img/bot.jpg" class="avatar">
+  <span class="bot-msg">${text}</span>
+  </div>`;
+  chatArea.insertAdjacentHTML("beforeend", temp);
+  chatArea.scrollTop = chatArea.scrollHeight;
+  botReply(text);
 });
 
 submitBtn.addEventListener('click', ()=> {
-    let userInput = inputElm.value;
-    let temp = `<div class="outgoing-msg">
-    <span class="my-msg">${userInput}</span>
-    <img src="img/me.jpg" class="avatar">
-    </div>`;
+  let userInput = inputElm.value;
+  let temp = `<div class="outgoing-msg">
+  <span class="my-msg">${userInput}</span>
+  <img src="img/me.jpg" class="avatar">
+  </div>`;
 
-    chatArea.insertAdjacentHTML("beforeend", temp);
-    chatArea.scrollTop = chatArea.scrollHeight;
-    inputElm.value = "";
-    socket.emit("chat message", userInput);
+  chatArea.insertAdjacentHTML("beforeend", temp);
+  chatArea.scrollTop = chatArea.scrollHeight;
+  inputElm.value = "";
+  socket.emit("chat message", userInput);
 })
 
 chatBtn.addEventListener('click', ()=>{
-    popup.classList.toggle('show');
+  popup.classList.toggle('show');
 })
