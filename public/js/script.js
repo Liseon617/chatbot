@@ -17,7 +17,6 @@ let recognised = false;
 
 const synth = window.speechSynthesis;
 micBtn.addEventListener("click", () => {
-  console.log(recognised)
   if(recognised == false) 
     recognition.start();
   else if (recognised == true)
@@ -30,12 +29,12 @@ recognition.onresult = function (event) {
 
   let temp = `<div class="outgoing-msg">
   <span class="my-msg">${text}</span>
-  <img src="img/me.jpg" class="avatar">
+  <img src="img/me.png" class="avatar">
   </div>`;
   chatArea.insertAdjacentHTML("beforeend", temp);
   chatArea.scrollTop = chatArea.scrollHeight;
   socket.emit("chat message", text);
-  recognised = true;
+  recognised = true; 
 };
 
 const botReply = (text) => {
@@ -57,7 +56,7 @@ const botReply = (text) => {
 
 socket.on("bot reply", (text) => {
   let temp = `<div class="incoming-msg">
-  <img src="img/bot.jpg" class="avatar">
+  <img src="img/bot.png" class="avatar">
   <span class="bot-msg">${text}</span>
   </div>`;
   chatArea.insertAdjacentHTML("beforeend", temp);
@@ -65,19 +64,27 @@ socket.on("bot reply", (text) => {
   botReply(text);
 });
 
-submitBtn.addEventListener('click', ()=> {
+submitBtn.addEventListener('click', () => {
   let userInput = inputElm.value;
   let temp = `<div class="outgoing-msg">
   <span class="my-msg">${userInput}</span>
-  <img src="img/me.jpg" class="avatar">
+  <img src="img/me.png" class="avatar">
   </div>`;
 
   chatArea.insertAdjacentHTML("beforeend", temp);
   chatArea.scrollTop = chatArea.scrollHeight;
   inputElm.value = "";
   socket.emit("chat message", userInput);
+  recognised = true; 
 })
 
-chatBtn.addEventListener('click', ()=>{
+inputElm.addEventListener("keyup", (event) => {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    submitBtn.click();
+  }
+})
+
+chatBtn.addEventListener('click', () =>{
   popup.classList.toggle('show');
 })

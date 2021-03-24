@@ -23,10 +23,11 @@ section {
 }
 
 .chat-btn {
+  font-size: 2rem;
   position: fixed;
   right: 50px;
   bottom: 50px;
-  background: #ffa726;
+  background: #65ADD7;
   color: #fff;
   width: 60px;
   height: 60px;
@@ -61,6 +62,7 @@ button {
   padding: 0.75rem;
   box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
   border-radius: 10px;
+  background: #f7f7f7 url(../img/geometry.png) 0 0 no-repeat;
 }
 
 .show {
@@ -87,7 +89,7 @@ button {
 }
 
 .incoming-msg  .bot-msg{
-  background-color: #ffa726;
+  background-color: #65ADD7;
   color: #fff;
   padding: 0.5rem;
   border-radius: 25px;
@@ -121,7 +123,7 @@ input:focus {
 .submit {
   padding: 0.25rem 0.70rem;
   margin-left: 0.5rem;
-  background-color: #ffa726;
+  background-color: #65ADD7;
   color: white;
   display: flex;
   justify-content: center;
@@ -131,12 +133,13 @@ input:focus {
 }
 
 .my-msg {
+  background-color: #65ADD7;
+  color: #fff;
   text-align: left;
   display: flex;
   justify-content: flex-end;
   margin: 0.75rem;
   padding: 0.5rem;
-  background-color: #ddd;
   border-radius: 25px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.4);
   word-break: break-all;
