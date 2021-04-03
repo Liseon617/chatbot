@@ -43,7 +43,7 @@ io.on("connection", function (socket) {
           session: sessionPath,
           queryInput: {
             text: {
-              text: message,
+              text: message, 
               languageCode: "en-US",
             },
           },
@@ -55,15 +55,14 @@ io.on("connection", function (socket) {
         socket.emit("bot reply", result);
         console.log(result);
         if (result.intent) {
-          console.log(`  Intent: ${result.intent.displayName}`);
+          console.log(`Intent: ${result.intent.displayName}`);
         } else {
-          console.log(`  No intent matched.`);
+          console.log(`No intent matched.`);
         }
       } catch (error) {
         console.log(error);
       }
     };
-
     callapibot();
   });
 });
